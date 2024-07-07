@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -13,6 +14,7 @@ public class Project {
     private String name;
 
     @OneToMany(mappedBy = "project")
+    @JsonManagedReference
     private List<Stock> stocks;
 
     // Getters and setters

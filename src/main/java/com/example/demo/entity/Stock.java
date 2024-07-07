@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -19,6 +20,7 @@ public class Stock {
 
     @ManyToOne
     @JoinColumn(name = "project_id")
+    @JsonBackReference
     private Project project;
 
     @OneToMany(mappedBy = "stock", cascade = CascadeType.ALL, orphanRemoval = true)
