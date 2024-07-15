@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysqlg
+    environment:
+      MYSQL_ROOT_PASSWORD: mamta
+      MYSQL_DATABASE: stock
+      MYSQL_PASSWORD: mamta
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  spring-boot-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    container_name: my-spring-boot-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/stock
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: mamta
+    ports:
+      - "8080:8080"
+
+volumes:
+  mysql_data:
